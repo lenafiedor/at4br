@@ -1,8 +1,6 @@
 # ex-3-lena-fiedor
 
 import requests
-import re
-import json
 from collections import namedtuple
 
 
