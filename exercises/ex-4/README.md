@@ -28,17 +28,14 @@ git clone <repo url or ssh>
 Well done! You've just created your first git repository. Now it's time to add the first file. To do so, you will have to:
 - Create the file
 - Add file to the commit using `git add <filename>`
-</br>
 > [!NOTE]
-> There is a useful **-u flag** for that command - by typing `git add -u` you add all untracked files to a particular commit.
+> There is a useful **-u flag** for that command - by typing `git add <filename>` you add all untracked files to a particular commit.
 
 - Commit changes by typing `git commit` - it will create a unique version of chosen files, with is own hash value; it can be restored later at any point.
-<br/>
 > [!NOTE]
 > Usually git requires you to specify a message for a praticular commit. It can be done by using **-m flag**, just like that: `git commit -m 'your message'`
 
 - Push the exsting changes to the cloud: `git push` command will update the changes you've commited on the remote repository.
-<br/>
 > [!TIP]
 > Don't forget to push your changes in case of fire.
 
