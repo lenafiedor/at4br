@@ -25,7 +25,7 @@ git clone <repo url or ssh>
 ```
 
 ### Saving changes
-Well done! You've just created your first git repository. Now it's time to add the first file. To do so, you will have to:
+Well done! :rocket: You've just created your first git repository. Now it's time to add the first file. To do so, you will have to:
 - Create the file
 - Add file to the commit using `git add <filename>`
 > [!NOTE]
@@ -53,7 +53,7 @@ Some extra functionalities to help you become a git expert.
 - `git log` - displays the commit logs
 - `git diff` - displays the changes between two commits, branches, commit and working tree etc.
 
-### Ooooops, something went wrong...
+### Ooooops, something went wrong... :skull:
 - You desperately need a time machine to come back to a particular version or want to restore accidentally deleted files?
 
 ```
@@ -76,12 +76,16 @@ git commit --amend
 And simply follow the displayed instructions.
 
 
-## Summary of commands with flags
+## Summary of commands with flags :bulb:
 
 Usage: `git <command> <flags>`
 
-| Command | Functionality | Flags (-short_name / --full_name) |
+| Command | Functionality | Flags (-short / --full-name) |
 | ------- | ------------- | ----- |
 | init    | initialize a new git repository | none |
-| add     | add changes to commit | -A / --all (adds all changes, including untracked and deleted files), -u / --update (adds only modified and deleted files, but not untracked) |
-| commit  | commit changes | -m <mess> / --message=<mess> (allows to specify the commit message without using text editor), -a / --all (stages changes automatically before commiting, equivalent to git add -u & git commit), --amend (edit the previous commit without creating a new one) |
+| add     | add changes to commit | **-A / --all** (adds all changes, including untracked and deleted files), **-u / --update** (adds only modified and deleted files, but not untracked) |
+| commit  | commit changes | **-m / --message** (allows to specify the commit message without using text editor), **-a / --all** (stages changes automatically before commiting, equivalent to git add -u & git commit), **--amend** (edit the previous commit without creating a new one) |
+| push    | push existing changes to the remote repository | **-u / --set-upstream origin &lt;branch-name&gt;** (sets the upstream branch for current local branch, enabling using git push without specyfying branch names in the future)
+
+### Usage of AI :alien:
+I hereby declare usage of ChatGPT 3.5 on account of finding useful flags for particular git commands.
