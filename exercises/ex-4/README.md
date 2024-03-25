@@ -29,11 +29,11 @@ Well done! You've just created your first git repository. Now it's time to add t
 - Create the file
 - Add file to the commit using `git add <filename>`
 > [!NOTE]
-> There is a useful **-u flag** for that command - by typing `git add <filename>` you add all untracked files to a particular commit.
+> There is a useful **-u flag** for this command - by typing `git add <filename>` you add all untracked files to a particular commit.
 
 - Commit changes by typing `git commit` - it will create a unique version of chosen files, with is own hash value; it can be restored later at any point.
 > [!NOTE]
-> Usually git requires you to specify a message for a praticular commit. It can be done by using **-m flag**, just like that: `git commit -m 'your message'`
+> Usually git requires you to specify a message for a particular commit. It can be done by using **-m flag**, just like that: `git commit -m 'your message'`
 
 - Push the exsting changes to the cloud: `git push` command will update the changes you've commited on the remote repository.
 > [!TIP]
@@ -51,6 +51,7 @@ git push
 Some extra functionalities to help you become a git expert.
 - `git status` - displays the status of working directory and staging area; for checking which files are tracked and which are staged for commit
 - `git log` - displays the commit logs
+- `git diff` - displays the changes between two commits, branches, commit and working tree etc.
 
 ### Ooooops, something went wrong...
 - You desperately need a time machine to come back to a particular version or want to restore accidentally deleted files?
@@ -64,3 +65,23 @@ git reset HEAD@{index}
 ```
 git add <filename>
 git commit --amend --no-edit
+```
+
+- You want to change the message of your last commit? Use:
+
+```
+git commit --amend
+```
+
+And simply follow the displayed instructions.
+
+
+## Summary of commands with flags
+
+Usage: `git <command> <flags>`
+
+| Command | Functionality | Flags (-short_name / --full_name) |
+| ------- | ------------- | ----- |
+| init    | initialize a new git repository | none |
+| add     | add changes to commit | -A / --all (adds all changes, including untracked and deleted files), -u / --update (adds only modified and deleted files, but not untracked) |
+| commit  | commit changes | -m <mess> / --message=<mess> (allows to specify the commit message without using text editor), -a / --all (stages changes automatically before commiting, equivalent to git add -u & git commit), --amend (edit the previous commit without creating a new one) |
