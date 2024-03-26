@@ -21,7 +21,7 @@ git init
 
 - Clone an existing repository into project directory using `git clone`:
 ```
-git clone <repo url or ssh>
+git clone <repo-url>
 ```
 
 ### Saving changes
@@ -104,6 +104,7 @@ Usage: `git <command> <flags>`
 | ------- | ------------- | ----- |
 | **add** | add changes to commit | `-A / --all` (adds all changes, including untracked and deleted files), `-u / --update` (adds only modified and deleted files, but not untracked) |
 | **branch** | list (without parameters), create, rename and delete branches | `<branch-name>` (creates new branch with specified name), `-m <old-name> <new-name>` (renames branch), `-d <branch-name>` (deletes specified branch), `-r` (lists remote branches), `-a` (lists both remote and local branches) |
+| **clone &lt;repo-url&gt;** | create a local copy of an existing repository | `-b <branch-name> <repo-url>` (checks out the specified branch after cloning; useful when you only need a specific branch) |
 | **checkout \[&lt;branch-name&gt;\]** | check info about current branch; with **&lt;branch-name&gt;** parameter - switch to another branch | `-b / -B <branch-name>` (creates new branch and switches to it if branch does not exist) |
 | **commit** | commit changes | `-m / --message` (allows to specify the commit message without using text editor), `-a / --all` (stages changes automatically before commiting, equivalent to git add -u & git commit), `--amend` (edits the previous commit without creating a new one) |
 | **diff** | display differences between two states of the repositiry | `<commit-hash-1> <commit-hash-2>` (compares two commits), `<main-branch>` (compare the current branch with main), `--staged` (wiev changes in the staging area) |
