@@ -1,0 +1,85 @@
+---
+title: "ex-6-lena-fiedor"
+format:
+  html:
+    toc: true
+    theme: midnight
+editor: visual
+---
+
+## Fetching the dataset
+
+First, we have to fetch the dataset and put it into a paged dataframe.
+
+```{r}
+#| warning: false
+#| echo: false
+
+library(tidyr)
+library(dplyr)
+library(rmarkdown)
+```
+
+```{r}
+#| warning: false
+
+data('iris')
+iris_wide <- paged_table(iris)
+```
+
+## Transforming the data set to longer
+
+Now, let's map the obtained dataframe to its 'linear' version. Here, each trait of the same sample is put in a different row. To do it, we have to match columns which contain the world 'Sepal' or 'Petal', rename the column to something more generic (Trait), and put all the values in a new column called Size.
+
+```{r}
+iris_long <- iris_wide %>% 
+  tidyr::pivot_longer(cols = matches('Sepal|Petal'), names_to='Trait', values_to='Size')
+```
+
+## Calculating the mean length and width of the sepal and petal of each species
+
+Here we're creating a new dataframe by grouping the original one by species name and summarizing them in a single row for each species. New three rows contain mean values for all four traits. It is useful to assign the newly created table to a new object as we will use it later.
+
+```{r}
+iris_means <- iris_wide %>%
+  group_by(Species) %>%
+  summarize(
+    MeanSepalLength = mean(Sepal.Length),
+    MeanSepalWidth = mean(Sepal.Width),
+    MeanPetalLength = mean(Petal.Length),
+    MeanPetalWidth = mean(Petal.Width)
+  )
+iris_means
+```
+
+## The largest and widest petal and sepal, of virginica and versicolor species
+
+First, we have to extract the samples of virginica and versicolor species. Then we group the table by these species and add four columns containg maximum values calculated for each trait.
+
+```{r}
+iris_wide %>%
+  filter(Species %in% c('virginica', 'versicolor')) %>%
+  group_by(Species) %>%
+  summarize(
+    LargestPetal = max(Petal.Length),
+    WidestPetal = max(Petal.Width),
+    LongestSepal = max(Sepal.Length),
+    WidestSepal = max(Sepal.Width)
+  )
+```
+
+## Counting observations are above the mean for each species
+
+It's time to use the previously created table containing mean values for each trait separately for every three species. First, we have to left join it with the original table, so every sample will have its mean values for all traits, assigned on the basis of the species name. The last thing to do is to count the number of occurrences of values greater than the average by using `sum()` function and summarize them in a single row for each species.
+
+```{r}
+iris_wide %>%
+  left_join(iris_means, by='Species') %>%
+  group_by(Species) %>%
+  summarize(
+    PetalLength_AboveMean = sum(Petal.Length > MeanPetalLength),
+    PetalWidth_AboveMean = sum(Petal.Width > MeanPetalWidth),
+    SepalLength_AboveMean = sum(Sepal.Length > MeanSepalLength),
+    SepalWidth_AboveMean = sum(Sepal.Width > MeanSepalWidth)
+  )
+```
