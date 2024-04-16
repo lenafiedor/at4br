@@ -3,7 +3,7 @@ title: "ex-6-lena-fiedor"
 format:
   html:
     toc: true
-    theme: midnight
+    theme: lumen
 editor: visual
 ---
 
@@ -54,7 +54,7 @@ iris_means
 
 ## The largest and widest petal and sepal, of virginica and versicolor species
 
-First, we have to extract the samples of virginica and versicolor species. Then we group the table by these species and add four columns containg maximum values calculated for each trait.
+First, we have to extract the samples of virginica and versicolor species. Then we group the table by these species and add four columns containing maximum values calculated for each trait.
 
 ```{r}
 iris_wide %>%

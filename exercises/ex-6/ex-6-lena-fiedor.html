@@ -147,7 +147,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="the-largest-and-widest-petal-and-sepal-of-virginica-and-versicolor-species" class="level2">
 <h2 class="anchored" data-anchor-id="the-largest-and-widest-petal-and-sepal-of-virginica-and-versicolor-species">The largest and widest petal and sepal, of virginica and versicolor species</h2>
-<p>First, we have to extract the samples of virginica and versicolor species. Then we group the table by these species and add four columns containg maximum values calculated for each trait.</p>
+<p>First, we have to extract the samples of virginica and versicolor species. Then we group the table by these species and add four columns containing maximum values calculated for each trait.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>iris_wide <span class="sc">%&gt;%</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Species <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">'virginica'</span>, <span class="st">'versicolor'</span>)) <span class="sc">%&gt;%</span></span>
