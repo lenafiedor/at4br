@@ -1,0 +1,75 @@
+---
+title: 'ex-7-lena-fiedor'
+author: Lena Fiedor
+format:
+  html:
+    toc: true
+    theme: lumen
+    embed-resources: true
+    code-fold: true
+    code-overflow: wrap
+editor: visual
+---
+
+```{r}
+#| warning: false
+#| echo: false
+
+library(ggplot2)
+```
+
+### Let's recall the original plot
+
+I'll try to repair the horrifying plot prepared by the Polish Ministry of Science and Higher Education. It shows the expenditures declared by entrepreneurs on R&D within the Scientific Research and Development Center between 2010 and 2016.
+
+![](images/bad_plot.png)
+
+Considering the last bar, the huge increase in spending is actually an aggregate forecast of spendings for the next four years (report was published in 2013). If we would want to divide this sum by four, we obtain mere 1215,5 M zloty for year, that is a decrease of about 5% compared to 2012.
+
+### What is to be done?
+
+In order to repair the plot, I decided to completely delete the prediction for years 2013-2016, as dividing 4862 by four and showing four equal bars with value of 1215.5 doesn't seem to reflect well the dynamics of the forecast for the next few years. I decided to include only one bar with a prediction for year 2014 instead, as I don't have access to the data on the basis of which the above predictions were created.
+
+### Restore input data
+```{r}
+years <- seq(2010, 2013)
+expenditures <- c(258, 363, 1282, 4862/4)
+```
+
+### Create a DataFrame
+
+After creating a DataFrame I added a column `isPrediction`, which stores an information if the value of expenditures for a certain year is a forecast or not.
+
+```{r}
+df <- data.frame(Year=years, Expenditures=expenditures)
+df$isPrediction=ifelse(df$Year==2013, TRUE, FALSE)
+```
+
+### Plot glow-up...
+
+```{r}
+ggplot(df, aes(x=factor(Year), y=Expenditures)) +
+  geom_bar(stat='identity', fill=ifelse(df$isPrediction, 'darkslategray4', 'bisque3'), width=ifelse(df$isPrediction, 0.2, 0.5)) + # add bars with colors depending on whether the value is a prediction or not
+  # note: bar width was not working correctly when I used width=0.5 (2013 bar was much wider), so I split them into two values depending on isPrediction
+  geom_text(aes(label=Expenditures, y=Expenditures+1, vjust=2), family='mono', size=3) + # add exact values of the expenditures
+  labs( # add labels
+    title='The expenditures on R&D declared by entrepreneurs',
+    x='Year',
+    y='Expenditures(mln ZL)'
+  ) +
+  theme(
+    text=element_text(family='mono'), # set font to monospace
+    plot.title=element_text(face='bold', hjust=0.5), # center and bold the title
+    axis.title=element_text(face='bold'), # bold the axes titles
+    panel.grid.major.x = element_blank(), # remove vertical lines
+    plot.margin = unit(rep(10, 4), 'mm') # add margins
+  ) +
+  facet_wrap(~ifelse(df$isPrediction, 'Prediction for 2013', '2010-2012'), scales='free_x') # split the plot into two separate ones for solid values and predictions
+```
+
+### ...And save it to file
+
+```{r}
+ggsave(filename='images/pretty_plot.png', height=10, width=15)
+```
+
