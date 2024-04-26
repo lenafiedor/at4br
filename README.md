@@ -14,6 +14,9 @@ Python script for fetching proteins from Uniprot database and displaying its pro
 ## ex-4
 A short GIT tutorial.
 
+## ex-5
+Bad data visualisation examples and ideas for repairing the plots.
+
 ## ex-6
 Quarto project with some basic calculations on iris dataset.
 
